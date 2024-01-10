@@ -7,6 +7,11 @@
                 @if ($project->type)
                     <p><strong>{{ isset($project->type) ? $project->type->name : '-' }}</strong></p>
                 @endif
+                <ul class="d-flex gap-2 ps-0">
+                    @foreach ($project->technologies as $technology)
+                        <li class="badge rounded-pill text-bg-primary">{{ $technology->name }}</li>
+                    @endforeach ()
+                </ul>
                 <p>{{ $project->description }}</p>
                 <p>{{ $project->start_date }}</p>
                 <p>{{ $project->end_date }}</p>
