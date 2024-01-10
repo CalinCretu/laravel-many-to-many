@@ -24,19 +24,34 @@
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select" name="status" id="status">
                         <option value="{{ old($project->status) }}">{{ $project->status }}</option>
-                        <option value="pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="ongoing" {{ old('status') == 'Ongoing' ? 'selected' : '' }}>Ongoing</option>
-                        <option value="completed" {{ old('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="Pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="Ongoing" {{ old('status') == 'Ongoing' ? 'selected' : '' }}>Ongoing</option>
+                        <option value="Completed" {{ old('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="type_id" class="form-label">Types</label>
                     <select class="form-select" name="type_id" id="type_id">
-                        <option>Select a Type</option>
+                        <option value="">Select a Type</option>
                         @foreach ($types as $type)
                             <option @selected(old('type_id', optional($project->type)->id) == $type->id) value="{{ $type->id }}">{{ $type->name }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="form-group mb-3">
+                    <p>Select Technologies</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        @foreach ($technologies as $technology)
+                            <div class="form-check">
+                                <input name="technologies[]" class="form-check-input" type="checkbox"
+                                    value="{{ $technology->id }}" id="thecnology-{{ $technology->id }}"
+                                    @checked(in_array($technology->id, old('technologies', $project->technologies->pluck('id')->all())))>
+                                <label class="form-check-label" for="thecnology-{{ $technology->id }}">
+                                    {{ $technology->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>

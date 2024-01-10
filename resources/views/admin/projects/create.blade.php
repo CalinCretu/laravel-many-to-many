@@ -36,8 +36,7 @@
                         @endforeach
                     </select>
                 </div>
-
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <p>Select Technologies</p>
                     <div class="d-flex flex-wrap gap-3">
                         @foreach ($technologies as $technology)

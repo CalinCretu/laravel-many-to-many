@@ -77,8 +77,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::orderBy('name', 'ASC')->get();
+        $technologies = Technology::orderBy('name', 'ASC')->get();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -87,10 +88,20 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $request->validate([
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ]);
+
         $data = $request->all();
+
         $project->update($data);
+
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->detach();
+        }
+
         return redirect()->route('admin.projects.show', $project);
     }
 
@@ -99,6 +110,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        $project->technologies()->sync([]);
         $project->delete();
         return redirect()->route('admin.projects.index');
     }
