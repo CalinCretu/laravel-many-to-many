@@ -22,9 +22,9 @@
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select" name="status" id="status">
                         <option value="">Select a status</option>
-                        <option value="Pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="Ongoing" {{ old('status') == 'ongoing' ? 'selected' : '' }}>Ongoing</option>
-                        <option value="Completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="ongoing" {{ old('status') == 'ongoing' ? 'selected' : '' }}>Ongoing</option>
+                        <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
                     </select>
                 </div>
                 <div class="mb-3">

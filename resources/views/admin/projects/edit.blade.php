@@ -22,11 +22,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
+                    {{-- @dump($project->status) --}}
                     <select class="form-select" name="status" id="status">
-                        <option value="{{ old($project->status) }}">{{ $project->status }}</option>
-                        <option value="Pending" {{ old('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="Ongoing" {{ old('status') == 'Ongoing' ? 'selected' : '' }}>Ongoing</option>
-                        <option value="Completed" {{ old('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="">Seleziona uno stato</option>
+                        <option value="pending" {{ old('status', $project->status) == 'pending' ? 'selected' : '' }}>Pending
+                        </option>
+                        <option value="ongoing" {{ old('status', $project->status) == 'ongoing' ? 'selected' : '' }}>Ongoing
+                        </option>
+                        <option value="completed" {{ old('status', $project->status) == 'completed' ? 'selected' : '' }}>
+                            Completed</option>
                     </select>
                 </div>
                 <div class="mb-3">
